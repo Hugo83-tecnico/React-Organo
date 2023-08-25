@@ -1,5 +1,5 @@
 import React, { useState }from "react";
-import CampoTexto from '../CampoTexto/CampoTexto';
+import Campo from '../Campo/Campo';
 import ListaSuspensa from "../ListaSuspensa/ListaSuspensa";
 import './Formulario.css';
 import Botao from "../Botao/Botao";
@@ -48,7 +48,7 @@ const Formulario = ({ recebeColaborador, times, cadastrarTime})=>{
             <form onSubmit={saveForm}>
                 <h2>Prencha os dados para criar o card do colaborador</h2>
 
-                <CampoTexto 
+                <Campo 
                     value={nome}
                     setValue={value => setName(value)} 
                     required={true} 
@@ -56,7 +56,7 @@ const Formulario = ({ recebeColaborador, times, cadastrarTime})=>{
                     placeholder="Digite seu nome"
                 />
 
-                <CampoTexto
+                <Campo
                     value={cargo}
                     setValue={value => setCargo(value)} 
                     required={true} 
@@ -64,7 +64,7 @@ const Formulario = ({ recebeColaborador, times, cadastrarTime})=>{
                     placeholder="Digite seu cargo"
                 />
 
-                <CampoTexto 
+                <Campo 
                     value={imagem}
                     setValue={value => setImagem(value)} 
                     required={true} 
@@ -85,7 +85,7 @@ const Formulario = ({ recebeColaborador, times, cadastrarTime})=>{
             <form onSubmit={cadastrarNovoTime}>
                 <h2>Prencha os dados para criar um novo time</h2>
 
-                <CampoTexto 
+                <Campo 
                     value={nomeTime}
                     setValue={value => setNomeTime(value)} 
                     required={true} 
@@ -93,8 +93,9 @@ const Formulario = ({ recebeColaborador, times, cadastrarTime})=>{
                     placeholder="Digite o nome do time"
                 />
 
-                <CampoTexto
+                <Campo
                     value={corTime}
+                    type="color"
                     setValue={value => setCorTime(value)} 
                     required={true} 
                     label='Cor do Time' 

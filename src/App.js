@@ -37,6 +37,7 @@ const inicial = [
   {
     id: uuidv4(),
     nome: 'HUGO GOMES',
+    favorito: false,
     cargo: 'Desenvolvedor junior',
     imagem: 'https://github.com/Hugo83-tecnico.png',
     time: cursos[3].nome
@@ -63,6 +64,15 @@ const inicial = [
     setCursos([...cursos,{...novoTime, id:uuidv4() }])
   }
 
+  function resolverFavorito(id){
+    setColaboradores(colaboradores.map(colaborador => {
+      if(colaborador.id === id)
+        colaborador.favorito = !colaborador.favorito;
+        return colaborador
+      
+    }))
+  };
+
 
   return(
     <Fragment>
@@ -72,7 +82,7 @@ const inicial = [
         recebeColaborador={colaborador => setColaboradores([...colaboradores,colaborador])}
         cadastrarTime={cadastrarTime}
       />
-        cadastrarTime={cadastrarTime}
+       
       <h1 className='titulo-organograma'>Minha Organização</h1>
       {cursos.map((time, indice) =>
         <Time 
@@ -82,6 +92,7 @@ const inicial = [
           time={time}
           colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)}
           deleteStaff={deletarColaborador}
+          clickFavoritar={resolverFavorito}
   
         />
       )}
@@ -93,6 +104,3 @@ const inicial = [
 
 export default App;
 
-
-
-//http://github.com/Hugo83-tecnico.png

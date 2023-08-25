@@ -4,7 +4,7 @@ import './Time.css'
 
 import Card from "../Card/Card";
 
-const Time = ({time, colaboradores,  deleteStaff, corTime})=>{
+const Time = ({time, colaboradores,  deleteStaff, corTime,clickFavoritar})=>{
 
     return(
 
@@ -14,13 +14,14 @@ const Time = ({time, colaboradores,  deleteStaff, corTime})=>{
             <div className="staff">
                 {colaboradores.map((colaborador, indece) => {
 
-                         return <Card
-                       
-                            key={indece}
-                            colaborador={colaborador}
-                            corFundo={time.cor}
-                            deleteStaff={deleteStaff}
-                         />
+                         return( 
+                            <Card
+                                key={indece}
+                                colaborador={colaborador}
+                                corFundo={time.cor}
+                                deleteStaff={deleteStaff}
+                                clickFavoritar={clickFavoritar}
+                         />)
 
 
                     }

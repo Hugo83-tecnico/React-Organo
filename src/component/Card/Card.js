@@ -1,10 +1,17 @@
 import React from "react";
-import { AiFillCloseCircle } from 'react-icons/ai';
+import { AiFillCloseCircle, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import './Card.css';
 
 
-const Card = ({colaborador,corFundo, deleteStaff })=>{
-    
+const Card = ({colaborador,corFundo, deleteStaff,clickFavoritar })=>{
+    const favoritar = ()=>{
+        clickFavoritar(colaborador.id);
+    }
+
+    const propsFavorito = {
+        size:25,
+        onClick: favoritar
+    }
 
     return(
         <div className="container" >
@@ -15,6 +22,12 @@ const Card = ({colaborador,corFundo, deleteStaff })=>{
             <div className="footer">
                 <h4>{colaborador.nome}</h4>
                 <h5>{colaborador.cargo}</h5>
+                <div className="favoritar">
+                    {colaborador.favorito 
+                        ? <AiFillHeart color="red"{...propsFavorito}/> 
+                        : <AiOutlineHeart {...propsFavorito}/>
+                    }
+                </div>
             </div>
         </div>
     )
