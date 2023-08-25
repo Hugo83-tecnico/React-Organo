@@ -13,7 +13,7 @@ const ListaSuspensa = ({ label, items, required, value, setValue })=>{
             <label>{ label }</label>
             <select value={value} onChange={selectValue}required={required}>
                 <option value=""></option>
-                {items.map(item=>{ return <option key={item}>{item}</option> })}        
+                {items.map((item, indece)=>{ return <option key={indece}>{item}</option> })}        
             </select>
         </div>
     )

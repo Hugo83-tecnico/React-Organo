@@ -1,56 +1,87 @@
 import React, { Fragment, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Banner from './component/Banner/Banner';
 import Formulario from './component/Formulario/Formulario';
 import Time from './component/Time/Time';
+import './App.css';
 
 
 function App(){
 
-  const conteudoAlura = [
+
+  const [cursos, setCursos]=  useState ([
   {
+    id: uuidv4(),
     nome:'Programação',
-    corPrimaria: '#57C278',
-    corSecundaria: '#D9F7E9',
+    cor: '#D9F7E9',
   },
   {
+    id: uuidv4(),
     nome:'Front-End',
-    corPrimaria: '#82CFFA',
-    corSecundaria: '#E8F8FF',
+    cor: '#E8F8FF',
   },
   {
+    id: uuidv4(),
     nome:'Data Sciense',
-    corPrimaria: '#A6D157',
-    corSecundaria: '#F0F8E2',
+    cor: '#F0F8E2',
   },
   {
+    id: uuidv4(),
     nome:'Devops',
-    corPrimaria: '#E06B69',
-    corSecundaria: '#FDE7E8',
+    cor: '#FDE7E8',
   }
 
+]);
 
+const inicial = [
+  {
+    id: uuidv4(),
+    nome: 'HUGO GOMES',
+    cargo: 'Desenvolvedor junior',
+    imagem: 'https://github.com/Hugo83-tecnico.png',
+    time: cursos[3].nome
+  }
 ]
 
-  const [colaboradores, setColaboradores] = useState([])
 
-  const guardaColaborador = (colaborador)=>{
-    setColaboradores([...colaboradores,colaborador])
-    
+  const [colaboradores, setColaboradores] = useState(inicial)
+
+  const deletarColaborador = (id)=>{
+    setColaboradores(colaboradores.filter(colaborador => colaborador.id !== id))
+  }
+
+  const alterarCorDoTime = (cor, id)=>{
+      setCursos(cursos.map(curso =>{
+          if(curso.id === id){
+            curso.cor = cor;
+          }
+          return curso;
+      }))
+  }
+
+  const cadastrarTime = (novoTime)=>{
+    setCursos([...cursos,{...novoTime, id:uuidv4() }])
   }
 
 
   return(
     <Fragment>
       <Banner/>
-      <Formulario times={conteudoAlura.map(conteudo => conteudo.nome)} recebeColaborador={colaborador =>(guardaColaborador(colaborador))}/>
-      {conteudoAlura.map(time =>
+      <Formulario 
+        times={cursos.map(curso => curso.nome)} 
+        recebeColaborador={colaborador => setColaboradores([...colaboradores,colaborador])}
+        cadastrarTime={cadastrarTime}
+      />
+        cadastrarTime={cadastrarTime}
+      <h1 className='titulo-organograma'>Minha Organização</h1>
+      {cursos.map((time, indice) =>
         <Time 
-          key={time.nome}
-          label={time.nome} 
-          corPrimaria={time.corPrimaria}
-          corSecundaria={time.corSecundaria}
+       
+          key={indice}
+          corTime={alterarCorDoTime}
+          time={time}
           colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)}
-        
+          deleteStaff={deletarColaborador}
   
         />
       )}

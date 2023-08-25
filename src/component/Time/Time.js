@@ -1,25 +1,29 @@
 import React from "react";
+import hexToRgba from 'hex-to-rgba';
 import './Time.css'
 
 import Card from "../Card/Card";
 
-const Time = ({label, colaboradores, corPrimaria, corSecundaria})=>{
-
-    const css = {backgroundColor:corSecundaria}
+const Time = ({time, colaboradores,  deleteStaff, corTime})=>{
 
     return(
 
-        (colaboradores.length > 0) ? <section className="time" style={css}>
-            <h3 style={{borderColor: corPrimaria}} >{label}</h3>
+        (colaboradores.length > 0) ? <section className="time" style={{backgroundColor: hexToRgba(time.cor, '0.4')}}>
+            <input type="color" value={time.cor} onChange={evento=> corTime(evento.target.value, time.id)} className="input-cor"/>
+            <h3 style={{borderColor: time.cor}} >{time.nome}</h3>
             <div className="staff">
-                {colaboradores.map(colaborador => 
-                    <Card
-                        corDefundo={corPrimaria}
-                        key={colaborador.name}
-                        nome={colaborador.name}
-                        cargo={colaborador.cargo}
-                        imagem={colaborador.imagem}
-                    />
+                {colaboradores.map((colaborador, indece) => {
+
+                         return <Card
+                       
+                            key={indece}
+                            colaborador={colaborador}
+                            corFundo={time.cor}
+                            deleteStaff={deleteStaff}
+                         />
+
+
+                    }
                 )}
             </div>
         </section>
